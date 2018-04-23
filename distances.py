@@ -13,9 +13,7 @@ def euclidean(string1, string2):
 	dist = 0
 	temp1 = [ord(char) for char in string1]
 	temp2 = [ord(char) for char in string2]
-	for c1, c2 in zip(temp1, temp2):
-		dist += (c1 - c2) ** 2
-	return math.sqrt(dist)
+	return sqrt(sum(pow(t1 - t2) for t1, t2 in zip(temp1, temp2)))
 
 
 def manhattan(string1, string2):
