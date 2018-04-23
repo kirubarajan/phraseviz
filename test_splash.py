@@ -13,5 +13,9 @@ def research():
   sentence2 = request.args.get('sentence2')
   return render_template("similarity.html", sentence1=sentence1, sentence2=sentence2)
 
+@app.route('/test')
+def test():
+  return render_template("anotha-test.html")
+
 if __name__ == "__main__":
   app.run(debug=True)

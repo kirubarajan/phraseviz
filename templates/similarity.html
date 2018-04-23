@@ -2,9 +2,40 @@
 <head>
 	<title>Visualizer Results</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
-	<script src="chart.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+	<script language="JavaScript">
+		function displayLineChart() {
+		    var data = {
+		        labels: ["Hamming", "Euclidean", "Manhattan", "Word2Vector"],
+		        datasets: [
+		            {
+		                label: "Similarity",
+		                data: [2, 3, 5, 7],
+		                backgroundColor: [
+			                'rgba(255, 99, 132)',
+			                'rgba(54, 162, 235)',
+			                'rgba(255, 206, 86)',
+			                'rgba(75, 192, 192)',
+			            ],		                
+		            },
+		        ]
+		    };
+		    var ctx = document.getElementById("lineChart").getContext("2d");
+		    var options = { 
+		    	scales: {
+            		yAxes: [{
+		                ticks: {
+		                    beginAtZero:true
+		                }
+            		}]
+        		}
+		    };
+		    var lineChart = new Chart(ctx).Bar(data, options);
+		}
+	</script>
 </head>
-<body>
+
+<body onload="displayLineChart();">
 	<section class="hero is-primary">
   		<div class="hero-body">
     		<div class="container">
@@ -18,7 +49,7 @@
 		<div class="container">
 			<div class="columns">
 				<div class="column">
-					<h1 class="title is-size-4">Results</h1>
+					<!-- <h1 class="title is-size-4">Results</h1>
 			  		<p>You entered:
 			  		<br>
 			  		{{ sentence1 }}
@@ -26,11 +57,31 @@
 			  		To be compared to:
 			  		<br>
 			  		{{ sentence2 }}
-			  		</p>
+			  		</p> -->
+			  		<div class="field">
+						<label class="label">Sentence 1</label>
+		  				<div class="control">
+		    				<textarea class="textarea" id="sentence1" placeholder="Hi there" rows="2" method="GET"></textarea>
+		  				</div>
+		  			</div>
+		  			<div class="field">
+		  				<label class="label">Sentence 2</label>
+		  				<div class="control">
+		    				<textarea class="textarea" id="sentence2" placeholder="Analyze us" rows="2" method="GET"></textarea>
+		  				</div>
+		  			</div>
+		  			<div class="field">
+						<p class="control">
+					    	<button class="button is-success" method="POST">
+								<p>Go!</p>
+					    	</button>
+					  	</p>
+					</div>
 				</div>
-				<div class="column">
+
+				<div class="column" style="margin-left:2rem">
 					<h1 class="title is-size-4">Visualization</h1>
-					<canvas id="myChart" width="400" height="400"></canvas>
+					<canvas id="lineChart" width="400" height="400"></canvas>
 				</div>
 			</div>
 		</div>
