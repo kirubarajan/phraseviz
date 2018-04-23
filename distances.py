@@ -13,11 +13,13 @@ def euclidean(string1, string2):
 	dist = 0
 	temp1 = [ord(char) for char in string1]
 	temp2 = [ord(char) for char in string2]
-	return sqrt(sum(pow(t1 - t2) for t1, t2 in zip(temp1, temp2)))
+	return math.sqrt(sum((t1 - t2) ** 2 for t1, t2 in zip(temp1, temp2)))
 
 
 def manhattan(string1, string2):
-	return 0
+	temp1 = [ord(char) for char in string1]
+	temp2 = [ord(char) for char in string2]
+	return sum(abs(t1 - t2) for t1, t2 in zip(temp1, temp2))
 
 if __name__ == "__main__":
 	s1 = "Helno"
@@ -28,3 +30,6 @@ if __name__ == "__main__":
 
 	res2 = euclidean(s1, s2)
 	print(res2)
+
+	res3 = manhattan(s1, s2)
+	print(res3)
