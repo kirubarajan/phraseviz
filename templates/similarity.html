@@ -1,2 +1,38 @@
-first sentence: {{sentence1}} <br /> <br />
-second sentence: {{sentence2}}
+<!doctype html>
+<head>
+	<title>Visualizer Results</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+	<script src="chart.js"></script>
+</head>
+<body>
+	<section class="hero is-primary">
+  		<div class="hero-body">
+    		<div class="container">
+    			<div class="levels">
+      			<h1 class="title">Difference-Visualizer 🔬</h1>
+      			<h2 class="subtitle">Cis 192 S18 Final Project, by Valencia and Arun</h2>
+    		</div>
+  		</div>
+	</section>
+	<section class="section">
+		<div class="container">
+			<div class="columns">
+				<div class="column">
+					<h1 class="title is-size-4">Results</h1>
+			  		<p>You entered:
+			  		<br>
+			  		{{ sentence1 }}
+			  		<br><br>
+			  		To be compared to:
+			  		<br>
+			  		{{ sentence2 }}
+			  		</p>
+				</div>
+				<div class="column">
+					<h1 class="title is-size-4">Visualization</h1>
+					<canvas id="myChart" width="400" height="400"></canvas>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
