@@ -49,16 +49,18 @@
 		<div class="container">
 			<div class="columns">
 				<div class="column">
-					<!-- <h1 class="title is-size-4">Results</h1>
-			  		<p>You entered:
-			  		<br>
-			  		{{ sentence1 }}
-			  		<br><br>
-			  		To be compared to:
-			  		<br>
-			  		{{ sentence2 }}
-			  		</p> -->
-			  		<div class="field">
+					<h1 class="title is-size-4">Results</h1>
+					{% block content %}
+				  		<p>You entered:
+				  		<br>
+				  		{{ session['sentence1'] }}
+				  		<br><br>
+				  		To be compared to:
+				  		<br>
+				  		{{ session['sentence2'] }}
+				  		</p>
+			  		{% endblock %}
+			  		<!-- <div class="field">
 						<label class="label">Sentence 1</label>
 		  				<div class="control">
 		    				<textarea class="textarea" id="sentence1" placeholder="Hi there" rows="2" method="GET"></textarea>
@@ -76,7 +78,7 @@
 								<p>Go!</p>
 					    	</button>
 					  	</p>
-					</div>
+					</div> -->
 				</div>
 
 				<div class="column" style="margin-left:2rem">

@@ -1,21 +1,19 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session, flash
 from distances import hamming, euclidean, manhattan
 
 app = Flask(__name__, static_folder='static')
 
-@app.route('/')
+app.secret_key = 'You Will Never Guess'
+
+@app.route('/', methods=['GET', 'POST'])
 def splash():
-  return render_template("index.html")
+	session['sentence1'] = request.args.get('sentence1')
+	session['sentence2'] = request.args.get('sentence2')
+	return render_template("index.html", sentence1=session['sentence1'], sentence2=session['sentence2'])
 
-@app.route('/similarity', methods=['GET', 'POST'])
+@app.route('/similarity')
 def research():
-  sentence1 = request.args.get('sentence1')
-  sentence2 = request.args.get('sentence2')
-  return render_template("similarity.html", sentence1=sentence1, sentence2=sentence2)
-
-@app.route('/test')
-def test():
-  return render_template("anotha-test.html")
+  	return render_template("similarity.html", sentence1=session['sentence1'], sentence2=session['sentence2'])
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  	app.run(debug=True)
