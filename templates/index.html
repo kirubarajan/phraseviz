@@ -10,8 +10,8 @@
 		        datasets: [
 		            {
 		                label: "Similarity",
-		                data: [2, 3, 5, 7],
-		                backgroundColor: [
+		                data: [0.2, 0.3, 0.5, 0.4],
+		                fillColor: [
 			                'rgba(255, 99, 132)',
 			                'rgba(54, 162, 235)',
 			                'rgba(255, 206, 86)',
@@ -53,17 +53,17 @@
 			  		<p>hi yes we made dis thing</p>
 			  		<br><br>
 			  		<h3 class="title is-size-4">Enter sentences here</h3>
-			  		<form action="" method="post">
+			  		<form role="form" method="post">
 						<div class="field">
 							<label class="label">Sentence 1</label>
 			  				<div class="control">
-			    				<textarea class="textarea" id="sentence1" placeholder="Hi there" rows="1" method="GET"></textarea>
+			    				<input class="textarea" id="sentence1" placeholder="Hi there" rows="1" method="GET"></input>
 			  				</div>
 			  			</div>
 			  			<div class="field">
 			  				<label class="label">Sentence 2</label>
 			  				<div class="control">
-			    				<textarea class="textarea" id="sentence2" placeholder="Analyze us" rows="1" method="GET"></textarea>
+			    				<input class="textarea" id="sentence2" placeholder="Analyze us" rows="1" method="GET"></input>
 			  				</div>
 			  			</div>
 			  			<div class="field">
@@ -75,14 +75,12 @@
 				</div>
 				<div class="column">
 					<h1 class="title is-size-4">Visualization</h1>
-						{% block content %}
 					  		<p>You entered:
-					  		{{ sentence1 }}
+					  		{{ s1 }}
 					  		<br><br>
 					  		To be compared to:
-					  		{{ sentence2 }}
+					  		{{ s2 }}
 					  		</p>
-				  		{% endblock %}
 				  		<br><br>
 				  		<canvas id="lineChart" width="400" height="400"></canvas>
 				</div>
