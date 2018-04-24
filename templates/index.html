@@ -1,1 +1,90 @@
-hi welcome to our project
+<!doctype html>
+<head>
+	<title>192 Final</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+	<script language="JavaScript">
+		function displayLineChart() {
+		    var data = {
+		        labels: ["Hamming", "Euclidean", "Manhattan", "Word2Vector"],
+		        datasets: [
+		            {
+		                label: "Similarity",
+		                data: [0.2, 0.3, 0.5, 0.4],
+		                fillColor: [
+			                'rgba(255, 99, 132)',
+			                'rgba(54, 162, 235)',
+			                'rgba(255, 206, 86)',
+			                'rgba(75, 192, 192)',
+			            ],		                
+		            },
+		        ]
+		    };
+		    var ctx = document.getElementById("lineChart").getContext("2d");
+		    var options = { 
+		    	scales: {
+            		yAxes: [{
+		                ticks: {
+		                    beginAtZero:true
+		                }
+            		}]
+        		}
+		    };
+		    var lineChart = new Chart(ctx).Bar(data, options);
+		}
+	</script>
+</head>
+
+<body onload="displayLineChart();">
+	<section class="hero is-primary">
+  		<div class="hero-body">
+    		<div class="container">
+    			<div class="levels">
+      			<h1 class="title">Difference-Visualizer 🔬</h1>
+      			<h2 class="subtitle">Cis 192 S18 Final Project, by Valencia and Arun</h2>
+    		</div>
+  		</div>
+	</section>
+	<section class="section">
+		<div class="container">
+			<div class="columns">
+				<div class="column">
+					<h1 class="title is-size-4">About the project</h1>
+			  		<p>hi yes we made dis thing</p>
+			  		<br><br>
+			  		<h3 class="title is-size-4">Enter sentences here</h3>
+			  		<form role="form" method="post">
+						<div class="field">
+							<label class="label">Sentence 1</label>
+			  				<div class="control">
+			    				<input class="textarea" id="sentence1" placeholder="Hi there" rows="1" method="GET"></input>
+			  				</div>
+			  			</div>
+			  			<div class="field">
+			  				<label class="label">Sentence 2</label>
+			  				<div class="control">
+			    				<input class="textarea" id="sentence2" placeholder="Analyze us" rows="1" method="GET"></input>
+			  				</div>
+			  			</div>
+			  			<div class="field">
+							<p class="control">
+						    	<input class="button is-success" type="submit" value="Go!" />
+						  	</p>
+						</div>
+					</form>
+				</div>
+				<div class="column">
+					<h1 class="title is-size-4">Visualization</h1>
+					  		<p>You entered:
+					  		{{ s1 }}
+					  		<br><br>
+					  		To be compared to:
+					  		{{ s2 }}
+					  		</p>
+				  		<br><br>
+				  		<canvas id="lineChart" width="400" height="400"></canvas>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
