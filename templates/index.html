@@ -53,17 +53,17 @@
 			  		<p>hi yes we made dis thing</p>
 			  		<br><br>
 			  		<h3 class="title is-size-4">Enter sentences here</h3>
-			  		<form role="form" method="post">
+			  		<form method="get" action="/">
 						<div class="field">
 							<label class="label">Sentence 1</label>
 			  				<div class="control">
-			    				<input class="textarea" id="sentence1" placeholder="Hi there" rows="1" method="GET"></input>
+			    				<input class="textarea" name="sentence1" placeholder="Hi there" rows="1"></input>
 			  				</div>
 			  			</div>
 			  			<div class="field">
 			  				<label class="label">Sentence 2</label>
 			  				<div class="control">
-			    				<input class="textarea" id="sentence2" placeholder="Analyze us" rows="1" method="GET"></input>
+			    				<input class="textarea" name="sentence2" placeholder="Analyze us" rows="1"></input>
 			  				</div>
 			  			</div>
 			  			<div class="field">
@@ -76,10 +76,10 @@
 				<div class="column">
 					<h1 class="title is-size-4">Visualization</h1>
 					  		<p>You entered:
-					  		{{ s1 }}
+					  		{{ sentence1 }}
 					  		<br><br>
 					  		To be compared to:
-					  		{{ s2 }}
+					  		{{ sentence2 }}
 					  		</p>
 				  		<br><br>
 				  		<canvas id="lineChart" width="400" height="400"></canvas>
