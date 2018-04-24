@@ -21,16 +21,26 @@ def get_sentences(string):
 # Generates and trains word2vec model
 def get_model(data):
   sentences = get_sentences(data)
-  model = Word2Vec(sentences, min_count=1, window=15)
+  model = Word2Vec(sentences, min_count=1, window=20)
   return model
 
 # Generates and trains word2vec model
 def average_vector(vectors):
   return sum(vectors) / len(vectors)
 
-# scales sigmoid function to work better with inputs within range [-1, 1]
-def scaled_sigmoid(n):
-  return 1 / (1 + math.exp(-(5000 * n)))
+# Returns a unit vector by dividing by a normal vector
+def unit_vector(vector):
+  return vector / np.linalg.norm(vector)
+
+# Returns cosine distance by clipping dot product
+def distance(vector1, vector2):
+  unit_vector1 = unit_vector(vector1)
+  unit_vector2 = unit_vector(vector2)
+  return 1 - np.arccos(np.clip(np.dot(unit_vector1, unit_vector2), -1.0, 1.0))
+
+# Returns distance "squashed" between 0 and 1
+def sigmoid(x):
+  return 1 / (1 + math.exp(-2 * x))
 
 # Calculates similary using cosine distance
 def similarity(string1, string2):
@@ -44,6 +54,6 @@ def similarity(string1, string2):
   string1_embedding = average_vector(string1_token_embeddings)
   string2_embedding = average_vector(string2_token_embeddings)
 
-  return distance.cosine(string1_embedding, string2_embedding)
+  return 1 - abs(distance(string1_embedding, string2_embedding))
 
-print(similarity("Afghanistan needs work", "America needs work"))
+print(similarity("they fought and died", "these men and women struggled and sacrificed"))
