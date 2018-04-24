@@ -10,13 +10,9 @@
 		        datasets: [
 		            {
 		                label: "Similarity",
-		                data: [0.2, 0.3, 0.5, 0.4],
-		                fillColor: [
-			                'rgba(255, 99, 132)',
-			                'rgba(54, 162, 235)',
-			                'rgba(255, 206, 86)',
-			                'rgba(75, 192, 192)',
-			            ],		                
+		                data: {{ res|tojson }},
+		                fillColor: "rgba(255,221,87,0.6)",
+            			strokeColor: "rgba(255,221,87)",              
 		            },
 		        ]
 		    };
