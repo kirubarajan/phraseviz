@@ -2,68 +2,74 @@
 <head>
 	<title>192 Final</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 	<script language="JavaScript">
-		function displayLineChart() {
-		    var data = {
-		        labels: ["Hamming", "Euclidean", "Manhattan", "Word2Vector"],
-		        datasets: [
-		            {
-		                label: "Similarity",
-		                data: [0.2, 0.3, 0.5, 0.4],
-		                fillColor: [
-			                'rgba(255, 99, 132)',
-			                'rgba(54, 162, 235)',
-			                'rgba(255, 206, 86)',
-			                'rgba(75, 192, 192)',
-			            ],		                
-		            },
-		        ]
-		    };
-		    var ctx = document.getElementById("lineChart").getContext("2d");
-		    var options = { 
-		    	scales: {
-            		yAxes: [{
-		                ticks: {
-		                    beginAtZero:true
-		                }
-            		}]
-        		}
-		    };
-		    var lineChart = new Chart(ctx).Bar(data, options);
+		function displayChart() {
+			var ctx = document.getElementById("chart");
+			var myChart = new Chart(ctx, {
+			    type: 'bar',
+			    data: {
+			        labels: ["Hamming", "Euclidean", "Manhattan", "Word2Vector"],
+			        datasets: [{
+			            data: {{ res|tojson }},
+			            backgroundColor: ["rgba(255,221,87,0.4)","rgba(32,156,238,0.4)","rgba(255,56,96,0.4)","rgba(35,209,96,0.4)"],
+			            borderColor: ["rgba(255,221,87)","rgba(32,156,238)","rgba(255,56,96)","rgba(35,209,96)"],
+						borderWidth: "1"  
+			        }]
+			    },
+			    options: {
+			        scales: {
+			            yAxes: [{
+			            	scaleLabel: {
+			            		display: true,
+			            		labelString: "Similarity"
+			            	},
+			                ticks: {
+			                    beginAtZero:true
+			                }
+			            }],
+			            xAxes: [{
+			            	scaleLabel: {
+			            		display:true,
+			            		labelString: "Heuristic"
+			            	}
+			            }]
+			        },
+			        legend: {
+			        	display: false
+			        }
+			    }
+			});
 		}
 	</script>
 </head>
 
-<body onload="displayLineChart();">
+<body onload="displayChart();">
 	<section class="hero is-primary">
   		<div class="hero-body">
     		<div class="container">
     			<div class="levels">
       			<h1 class="title">Difference-Visualizer 🔬</h1>
-      			<h2 class="subtitle">Cis 192 S18 Final Project, by Valencia and Arun</h2>
+      			<!-- <h2 class="subtitle">Cis 192 S18 Final Project, by Valencia and Arun</h2> -->
     		</div>
   		</div>
 	</section>
 	<section class="section">
 		<div class="container">
 			<div class="columns">
-				<div class="column">
-					<h1 class="title is-size-4">About the project</h1>
-			  		<p>hi yes we made dis thing</p>
-			  		<br><br>
+				<div class="column" style="margin-right:3rem">
 			  		<h3 class="title is-size-4">Enter sentences here</h3>
-			  		<form role="form" method="post">
+			  		<form method="get" action="/">
 						<div class="field">
 							<label class="label">Sentence 1</label>
 			  				<div class="control">
-			    				<input class="textarea" id="sentence1" placeholder="Hi there" rows="1" method="GET"></input>
+			    				<input class="textarea" name="sentence1" placeholder="Hi there" rows="1"></input>
 			  				</div>
 			  			</div>
 			  			<div class="field">
 			  				<label class="label">Sentence 2</label>
 			  				<div class="control">
-			    				<input class="textarea" id="sentence2" placeholder="Analyze us" rows="1" method="GET"></input>
+			    				<input class="textarea" name="sentence2" placeholder="Analyze us" rows="1"></input>
 			  				</div>
 			  			</div>
 			  			<div class="field">
@@ -72,17 +78,20 @@
 						  	</p>
 						</div>
 					</form>
+					<br><br>
+					<h1 class="title is-size-4">About</h1>
+			  		<p>This final project was created by Valencia and Arun for CIS 192, Spring 2018. Something something something</p>
 				</div>
 				<div class="column">
 					<h1 class="title is-size-4">Visualization</h1>
-					  		<p>You entered:
-					  		{{ s1 }}
-					  		<br><br>
-					  		To be compared to:
-					  		{{ s2 }}
+					  		<p><i>Sentence 1:</i>
+					  		{{ sentence1 }}
+					  		<br>
+					  		<i>Sentence 2:</i>
+					  		{{ sentence2 }}
 					  		</p>
-				  		<br><br>
-				  		<canvas id="lineChart" width="400" height="400"></canvas>
+				  		<br>
+				  		<canvas id="chart" width="400" height="250"></canvas>
 				</div>
 			</div>
 		</div>
