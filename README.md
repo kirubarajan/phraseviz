@@ -1,5 +1,5 @@
 # Viz-Similar
-Cis 192 Final Project
+Cis 192 S18 Final Project, by Valencia and Arun
 
 Calculates and visualizes various similarity metrics between two pieces of text, such as hamming distance, Euclidian distance, Manhattan distance, and "meaning" distance (calculated using non-stopword vector embeddings).
 
@@ -14,6 +14,3 @@ We use a decorator for the `/` route and its methods GET and POST.
 Calculate similarity with GET parameters at `/`
 
 Type two sentences into in input areas and click 'Go!' to visualize the similarity between them.
-
-## Group Members
-Made by Valencia and Arun
