@@ -1,13 +1,14 @@
 from flask import Flask, request, render_template
 from distances import hamming, euclidean, manhattan
-# from nlp import similarity
+from nlp import similarity
 
 class DistanceCalculator(object):
 	def __init__(self, sentence1, sentence2):
 		self.ham = hamming(sentence1, sentence2)
 		self.euc = euclidean(sentence1, sentence2)
 		self.man = manhattan(sentence1, sentence2)
-		self.res = [self.ham, self.euc, self.man]
+		self.w2v = similarity(sentence1, sentence2)
+		self.res = [self.ham, self.euc, self.man, self.w2v]
 
 app = Flask(__name__, static_folder='static')
 
