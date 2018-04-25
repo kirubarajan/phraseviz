@@ -1,5 +1,6 @@
 import math
 
+
 class SenLen(object):
 	def __init__(self, a):
 		self.val = len(a)
