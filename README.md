@@ -24,8 +24,7 @@ computes distance calculations and sends the similarities to the Flask template 
 Traditional string manipulation technique implementations are in `distances.py` which we `import` into `main.py`. These include
 Hamming distance, Euclidian distance, and Manhattan distance. To determine similarity, these distances are computed and then
 divided by the length of the larger string in order to yield a value between 0 and 1. Finally, we take the compliment of this value to 
-represent the similarity. In `distances.py`, we also implemented a class named `SenLen` to handle certain string manipulation logic
-- namely padding strings in case of differing lengths. We use magic methods to handle comparisons.
+represent the similarity. In `distances.py`, we also implemented a class named `SenLen` to handle certain string manipulation logic—namely padding strings in case of differing lengths. We use magic methods to handle comparisons.
 
 The "meaning" distance heuristic is implemented in `nlp.py` and is imported into `main.py`. First, we remove all stopwords from 
 the input (e.g. words like "the" and "for" that yield no meaning) using the `nltk` package (English).
