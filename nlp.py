@@ -10,7 +10,7 @@ def tokenize(string):
     text = re.sub("[^a-zA-Z]", " ", string)
     tokens = text.lower().split()
     english_stop_words = set(stopwords.words("english"))
-    tokens = [token for token in tokens if not in english_stop_words]
+    tokens = [token for token in tokens if token not in english_stop_words]
     return tokens
 
 

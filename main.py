@@ -19,8 +19,8 @@ def splash():
 	s1 = request.args.get('sentence1')
 	s2 = request.args.get('sentence2')
 
-	if sentence1 is not None and sentence2 is not None:
-		dist = DistanceCalculator(sentence1, sentence2)
+	if s1 is not None and s2 is not None:
+		dist = DistanceCalculator(s1, s2)
 		res = dist.res
 	else:
 		res = None
