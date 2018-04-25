@@ -2,7 +2,6 @@ import math
 import re
 import numpy as np
 from nltk.corpus import stopwords
-from scipy.spatial import distance
 from gensim.models import Word2Vec
 
 # Removes stopwords from string and tokenizes string
@@ -38,22 +37,19 @@ def distance(vector1, vector2):
   unit_vector2 = unit_vector(vector2)
   return 1 - np.arccos(np.clip(np.dot(unit_vector1, unit_vector2), -1.0, 1.0))
 
-# Returns distance "squashed" between 0 and 1
-def sigmoid(x):
-  return 1 / (1 + math.exp(-2 * x))
-
 # Calculates similary using cosine distance
 def similarity(string1, string2):
   with open('corpus.txt', 'r') as f:
     data = f.read().replace('\n', '')
   model = get_model(data)
-
+  
   string1_token_embeddings = [model[token] for token in tokenize(string1) if token in model]
   string2_token_embeddings = [model[token] for token in tokenize(string2) if token in model]
+
+  if len(string1_token_embeddings) == 0 or len(string2_token_embeddings) == 0:
+    return 0
 
   string1_embedding = average_vector(string1_token_embeddings)
   string2_embedding = average_vector(string2_token_embeddings)
 
   return 1 - abs(distance(string1_embedding, string2_embedding))
-
-print(similarity("they fought and died", "these men and women struggled and sacrificed"))

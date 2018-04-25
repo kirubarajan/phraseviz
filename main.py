@@ -16,10 +16,14 @@ app = Flask(__name__, static_folder='static')
 def splash():
 	sentence1 = request.args.get('sentence1')
 	sentence2 = request.args.get('sentence2')
-	temp = DistanceCalculator(sentence1, sentence2)
-	res = temp.res
-	return render_template("index.html", sentence1=sentence1, sentence2=sentence2, res=res)
 
+	if sentence1 is not None and sentence2 is not None:
+		dist = DistanceCalculator(sentence1, sentence2)
+		res = dist.res
+	else:
+		res = None
+
+	return render_template("index.html", sentence1=sentence1, sentence2=sentence2, res=res)
 
 if __name__ == "__main__":
   app.run(debug=True)

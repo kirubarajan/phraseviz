@@ -75,18 +75,3 @@ def manhattan(string1, string2):
 	max_distance = 26 * s1.maxi(s2)
 
 	return 1 - (res / max_distance)
-
-if __name__ == "__main__":
-	a = "americans"
-	b = "america"
-
-	res1 = hamming(a, b)
-	print(res1)
-
-	res2 = euclidean(a, b)
-	print(res2)
-
-	res3 = manhattan(a, b)
-	print(res3)
-
-	pass
