@@ -2,8 +2,7 @@ import math
 import re
 import numpy as np
 from nltk.corpus import stopwords
-from gensim.models import Word2Vec
-
+from pymagnitude import Magnitude
 
 # Removes stopwords from string and tokenizes string
 def tokenize(string):
@@ -21,9 +20,23 @@ def get_sentences(string):
 
 
 # Generates and trains word2vec model
-def get_model(data):
-    sentences = get_sentences(data)
-    model = Word2Vec(sentences, min_count=1, window=20)
+def get_model():
+    class Word2Vec:
+        def __init__(self, vectors):
+            self.vectors = vectors
+            self.layer1_size = self.vectors.dim
+
+        def __getitem__(self, word):
+            return self.vectors.query(word)
+        
+        def __contains__(self, word):
+            return word in self.vectors
+        
+        def dim(self):
+            return self.vectors.dim 
+
+    vectors = Magnitude('GoogleNews-vectors-negative300.magnitude')
+    model = Word2Vec(vectors)
     return model
 
 
@@ -46,17 +59,15 @@ def distance(vector1, vector2):
 
 # Calculates similary using cosine distance
 def similarity(string1, string2):
-    with open('corpus.txt', 'r') as f:
-        data = f.read().replace('\n', '')
-        model = get_model(data)
+    model = get_model()
 
-        string1_token_emb = [model[t] for t in tokenize(string1) if t in model]
-        string2_token_emb = [model[t] for t in tokenize(string2) if t in model]
+    string1_token_emb = [model[t] for t in tokenize(string1) if t in model]
+    string2_token_emb = [model[t] for t in tokenize(string2) if t in model]
 
-        if len(string1_token_emb) == 0 or len(string2_token_emb) == 0:
-            return 0
+    if len(string1_token_emb) == 0 or len(string2_token_emb) == 0:
+        return 0
 
-        string1_embedding = average_vector(string1_token_emb)
-        string2_embedding = average_vector(string2_token_emb)
+    string1_embedding = average_vector(string1_token_emb)
+    string2_embedding = average_vector(string2_token_emb)
 
-        return 1 - abs(distance(string1_emb, string2_emb))
+    return 1 - abs(distance(string1_embedding, string2_embedding))

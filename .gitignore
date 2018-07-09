@@ -1,2 +1,6 @@
 .vscode
 .DS_STORE
+GoogleNews-vectors-negative300.magnitude
+venv/
+.vscode/
+__pycache__/

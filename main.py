@@ -13,7 +13,6 @@ class DistanceCalculator(object):
 
 app = Flask(__name__, static_folder='static')
 
-
 @app.route('/', methods=['GET', 'POST'])
 def splash():
 	s1 = request.args.get('sentence1')
